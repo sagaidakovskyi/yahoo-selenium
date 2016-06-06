@@ -1,28 +1,32 @@
 package com.msagaidakovskyi.yahoo.project.tests;
 
 import java.net.URL;
-import org.apache.bcel.util.ClassLoader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 public abstract class AbstractTest {
     protected WebDriver driver;
 
-    @BeforeClass(alwaysRun = true, description = "Start the Browser")
+    protected String userName = "java.selenium";
+    protected String password = "securePWDforJAVA";
+
+    @BeforeMethod(alwaysRun = true, description = "Start the Browser")
     @Parameters("browser")
     public void startBrowser(@Optional("chrome") String browser) {
-        ClassLoader classLoader = new ClassLoader();
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         URL url = classLoader.getResource("chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", url.toString().replace("file:/", ""));
         driver = new ChromeDriver();
     }
 
-    @AfterClass(description = "Stop the Browser", alwaysRun = true)
+    @AfterMethod(description = "Stop the Browser", alwaysRun = true)
     public void stopBrowser() {
-        driver.quit();
+        if(driver != null) {
+            driver.quit();
+        }
     }
 }

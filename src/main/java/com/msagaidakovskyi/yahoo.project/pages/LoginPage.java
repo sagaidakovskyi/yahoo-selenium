@@ -28,7 +28,11 @@ public class LoginPage {
     @FindBy(id = "mbr-login-greeting")
     private WebElement userGreetingText;
 
-    By backBtn = By.className("mbr-button-link-back");
+    @FindBy(xpath = "//div[contains(@id,'mbr-login-error') and not(contains(@class,'mbr-hide'))]")
+    private WebElement wrongUsrNameMessage;
+
+
+    private By backBtn = By.className("mbr-button-link-back");
 
     private WebDriver driver;
 
@@ -57,17 +61,34 @@ public class LoginPage {
         return new MailPage(driver);
     }
 
-    public MailPage loginAs(String email, String pwd) {
+    public String getSorryText(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//div[contains(@id,'mbr-login-error') and not(contains(@class,'mbr-hide'))]")));
 
+        return wrongUsrNameMessage.getText();
+    }
+
+    public void navigateToLogin(){
         driver.navigate().to(APP_URL);
+    }
 
-        this.emailTxtField.sendKeys(email);
-        this.nextBtn.click();
+    public MailPage loginAs(String email, String pwd) {
+        navigateToLogin();
+        setEmailTxtField(email);
+        clickNextBtn();
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(backBtn));
-        this.pwdTxtField.sendKeys(pwd);
-        this.nextBtn.click();
-        return new MailPage(driver);
+        setPassword(pwd);
+        clickSignInBtn();
 
+        return new MailPage(driver);
+    }
+
+    public LoginPage enterAnyUsername(String anyUsername) {
+        navigateToLogin();
+        setEmailTxtField(anyUsername);
+        clickNextBtn();
+
+        return this;
     }
 
 }
