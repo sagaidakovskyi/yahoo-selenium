@@ -26,6 +26,13 @@ public class MailPage {
         PageFactory.initElements(driver, this);
     }
 
+    public String getTitle(){
+
+        String title = this.driver.getTitle();
+
+        return title;
+    }
+
     public LoginPage logout(){
         accountButton.click();
         exitButton.click();

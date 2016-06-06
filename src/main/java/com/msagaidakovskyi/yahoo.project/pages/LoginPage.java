@@ -18,19 +18,21 @@ public class LoginPage {
     String APP_TITLE = "Yahoo - login";
 
     @FindBy(id = "login-username")
-    private WebElement email;
+    private WebElement emailTxtField;
 
     @FindBy(id = "login-signin")
     private WebElement nextBtn;
 
     @FindBy(id = "login-passwd")
-    private WebElement pwd;
+    private WebElement pwdTxtField;
 
     @FindBy(id = "login-signin")
     private WebElement signInBtn;
 
     @FindBy(id = "mbr-login-greeting")
     private WebElement userGreetingText;
+
+    By backBtn = By.className("mbr-button-link-back");
 
     private WebDriver driver;
 
@@ -41,13 +43,13 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    public LoginPage setEmail(String email) {
-        this.email.sendKeys(email);
+    public LoginPage setEmailTxtField(String emailTxtField) {
+        this.emailTxtField.sendKeys(emailTxtField);
         return this;
     }
 
     public LoginPage setPassword(String pwd) {
-        this.pwd.sendKeys(pwd);
+        this.pwdTxtField.sendKeys(pwd);
         return this;
     }
 
@@ -65,10 +67,10 @@ public class LoginPage {
 
         driver.navigate().to(APP_URL);
 
-        this.email.sendKeys(email);
+        this.emailTxtField.sendKeys(email);
         this.nextBtn.click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.className("mbr-button-link-back")));
-        this.pwd.sendKeys(pwd);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(backBtn));
+        this.pwdTxtField.sendKeys(pwd);
         this.nextBtn.click();
         return new MailPage(driver);
 
