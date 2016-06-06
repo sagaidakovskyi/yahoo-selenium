@@ -1,4 +1,4 @@
-package com.msagaidakovskyi.yahoo.project.abstract_tests;
+package com.msagaidakovskyi.yahoo.project.abstractTests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,5 +21,4 @@ public abstract class AbstractTest {
     public void stopBrowser() {
         driver.quit();
     }
-
 }

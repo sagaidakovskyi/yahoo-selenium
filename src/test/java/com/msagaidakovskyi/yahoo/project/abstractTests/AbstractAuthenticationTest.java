@@ -1,4 +1,4 @@
-package com.msagaidakovskyi.yahoo.project.abstract_tests;
+package com.msagaidakovskyi.yahoo.project.abstractTests;
 
 import com.msagaidakovskyi.yahoo.project.pages.MailPage;
 import org.testng.annotations.AfterClass;

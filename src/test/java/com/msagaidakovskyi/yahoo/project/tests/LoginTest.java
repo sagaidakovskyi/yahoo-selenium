@@ -1,6 +1,6 @@
 package com.msagaidakovskyi.yahoo.project.tests;
 
-import com.msagaidakovskyi.yahoo.project.abstract_tests.AbstractAuthenticationTest;
+import com.msagaidakovskyi.yahoo.project.abstractTests.AbstractAuthenticationTest;
 import com.msagaidakovskyi.yahoo.project.pages.LoginPage;
 import com.msagaidakovskyi.yahoo.project.pages.MailPage;
 import org.testng.annotations.Test;
@@ -12,13 +12,10 @@ import static org.testng.Assert.assertEquals;
  */
 public class LoginTest extends AbstractAuthenticationTest {
 
-
-
-    @Test(description = "Login to Yahoo")
+    @Test(description = "Login to Yahoo Mail")
     public void testLoginToYahoo() {
         LoginPage loginPage = new LoginPage(driver);
         MailPage mailPage = loginPage.loginAs(userName, password);
-
         assertEquals(mailPage.getTitle(), userName + " - Yahoo Mail");
     }
 }

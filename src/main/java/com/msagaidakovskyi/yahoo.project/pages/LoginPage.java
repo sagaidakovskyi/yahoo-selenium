@@ -8,10 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-/**
- * Created by Mykola.Sagaidakovsky on 28.05.2016.
- */
 public class LoginPage {
 
     String APP_URL = "http://www.mail.yahoo.com";
@@ -35,8 +31,6 @@ public class LoginPage {
     By backBtn = By.className("mbr-button-link-back");
 
     private WebDriver driver;
-
-
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -75,6 +69,5 @@ public class LoginPage {
         return new MailPage(driver);
 
     }
-
 
 }
